@@ -14,13 +14,12 @@ class CategoriesSeeder extends Seeder
     public function run(): void
     {
         $foodCategories = [
-            'Appetizers',
             'Soups',
             'Salads',
             'Main Dishes',
             'Side Dishes',
             'Desserts',
-            'Beverages',
+            'Snacks',
         ];
 
         foreach ($foodCategories as $categoryName) {

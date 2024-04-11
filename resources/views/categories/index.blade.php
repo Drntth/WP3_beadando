@@ -1,31 +1,40 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="row">
-    <div class="col-md-12">
-        <h2>Choose a Category</h2>
-        <ul class="list-group border rounded-lg">  @foreach($categories as $category)
-            <li class="list-group-item bg-gray-light"> 
-                <a href="{{ route('recipes.index', $category->slug) }}" class="text-light">
-                    {{ $category->name }}
-                </a>
-            </li>
-            @endforeach
-        </ul>
+<div class="container py-5">
+    <div class="row align-items-center">
+        <div class="col-md-6 mx-auto">
+            <div class="card border-0 shadow rounded-lg">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Explore Recipes by Category</h2>
+                    <div class="list-group">
+                        @foreach($categories as $category)
+                        <a href="{{ route('recipes.index', $category->slug) }}" class="list-group-item list-group-item-action bg-gray-light text-light">
+                            {{ $category->name }}
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-@isset($recipes)
-<div class="row mt-5">
-    <div class="col-md-6 mx-auto">
-        <h2>Recipes in {{ $category->name }}</h2>  
-        @foreach ($recipes as $recipe)
-        @include('recipes._item_album')
-        @endforeach
+    @isset($recipes)
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            <h2 class="mb-4">Recipes in {{ $category->name }}</h2>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                @foreach ($recipes as $recipe)
+                <div class="col">
+                    @include('recipes._item_card')
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
+    <div class="d-flex justify-content-center mt-5">
+        {{ $recipes->links() }}
+    </div>
+    @endisset
 </div>
-<div class="d-flex justify-content-center">
-    {{ $recipes->links() }}
-</div>
-@endisset
 @endsection

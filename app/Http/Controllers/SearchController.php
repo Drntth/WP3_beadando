@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use Auth;
 
-class HomeController extends Controller
+class SearchController extends Controller
 {
-    public function index(Request $request) 
+    public function index(Request $request)
     {
         $searchTerm = $request->get('search');
 
@@ -25,9 +25,9 @@ class HomeController extends Controller
             $message = "No recipes found for '{$searchTerm}'";
             $createNewUrl = Auth::check() ? route('recipes.create') : route('register');
             $createNewText = Auth::check() ? 'Create a new recipe' : 'Register to create a recipe';
-            return view('home', compact('message', 'createNewUrl', 'createNewText'));
+            return view('search', compact('message', 'createNewUrl', 'createNewText'));
         }
 
-        return view('home', compact('recipes', 'searchTerm'));
+        return view('search', compact('recipes', 'searchTerm'));
     }
 }

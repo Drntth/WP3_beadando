@@ -1,0 +1,7 @@
+.bg-white-opacity {
+    background-color: rgba(255, 255, 255, 0.4); /* White with 50% transparency */
+}
+
+.rounded {
+    border-radius: 10px;
+}

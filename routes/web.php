@@ -10,9 +10,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('recipes.not-found');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
@@ -31,6 +34,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->name(
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class,'show'])->name('profile');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     
     Route::get('/createNewRecipe', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/createNewRecipe', [RecipeController::class, 'store'])->name('recipes.store');

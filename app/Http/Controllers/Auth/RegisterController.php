@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-// use Auth;
+use Auth;
 use Hash;
 
 class RegisterController extends Controller
@@ -23,12 +23,18 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
         ]);
-        
-        return redirect()->route('login')->with('status', 'Registration successful! You can now login.');
+
+        if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
+            Auth::login($user);
+        } else {
+            return back()->withErrors(['email' => 'An error occurred during registration.']);
+        }
+
+        return redirect()->intended('/');
     }
 }

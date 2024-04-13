@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/createNewRecipe', [RecipeController::class, 'store'])->name('recipes.store');
     Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::put('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
+    Route::post('/recipes/{recipe}/comment', [RecipeController::class, 'comment'])->name('recipes.comment');
     // Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
     
     // Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');

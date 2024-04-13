@@ -29,4 +29,17 @@ class Recipe extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+    }
+
+    public function getImage() {
+        if ($this->image !== null) {
+            return "storage//img/uploads/{$this->image}";
+        } else {
+            return 'storage/img/default/recipe.png';
+        }
+    }
 }

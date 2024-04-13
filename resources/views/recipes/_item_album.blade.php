@@ -1,6 +1,6 @@
 <div class="col d-flex">
     <div class="card shadow-sm w-100">
-        <img src="{{ $recipe->image }}" class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <img src="{{ $recipe->image }}" class="card-img-top img-fluid mx-auto" style="max-width: 300px; max-height: 300px;" alt="{{ $recipe->title }}">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
                 <a href="{{ route('recipes.show', $recipe) }}" class="text-light">

@@ -6,6 +6,7 @@
 <body>
     @include('layouts._header')
     @include('layouts._nav')
+    @include('layouts.alerts._success')
     <main class="container py-5">
         @yield('content')
     </main>

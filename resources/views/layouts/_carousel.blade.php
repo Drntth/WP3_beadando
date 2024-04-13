@@ -9,7 +9,7 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ asset('img/desserts.jpeg') }}" class="d-block w-100" alt="Desserts">
+            <img src="{{ asset('/storage/img/carousel/desserts.jpeg') }}" class="d-block w-100" alt="Desserts">
             <div class="container">
                 <div class="carousel-caption text-start rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Desserts</h1>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/mainCourses.jpeg') }}" class="d-block w-100" alt="Main Dishes">
+            <img src="{{ asset('storage/img/carousel/mainCourses.jpeg') }}" class="d-block w-100" alt="Main Dishes">
             <div class="container">
                 <div class="carousel-caption rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Main Dishes</h1>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/salads.jpeg') }}" class="d-block w-100" alt="Salads">
+            <img src="{{ asset('storage/img/carousel/salads.jpeg') }}" class="d-block w-100" alt="Salads">
             <div class="container">
                 <div class="carousel-caption text-end rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Salads</h1>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/sideDishes.jpeg') }}" class="d-block w-100" alt="Side Dishes">
+            <img src="{{ asset('storage/img/carousel/sideDishes.jpeg') }}" class="d-block w-100" alt="Side Dishes">
             <div class="container">
                 <div class="carousel-caption text-start rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Side Dishes</h1>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/snacks.jpeg') }}" class="d-block w-100" alt="Snacks">
+            <img src="{{ asset('storage/img/carousel/snacks.jpeg') }}" class="d-block w-100" alt="Snacks">
             <div class="container">
                 <div class="carousel-caption rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Snacks</h1>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('img/soups.jpeg') }}" class="d-block w-100" alt="Soups">
+            <img src="{{ asset('storage/img/carousel/soups.jpeg') }}" class="d-block w-100" alt="Soups">
             <div class="container">
                 <div class="carousel-caption text-end rounded p-3 bg-white-opacity">
                     <h1 class="display-1">Soups</h1>

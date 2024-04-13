@@ -15,5 +15,5 @@
     <small class="text-body-secondary">{{ $recipe->updated_at->format('F j, Y') }}</small>
 </div>
 <div class="col-md-5{{ $loop->odd ? '' : ' order-md-1' }}">
-    <img class="featurette-image img-fluid mx-auto" src="{{ $recipe->image }}" alt="{{ $recipe->title }}">
+    <img class="featurette-image img-fluid mx-auto" style="max-width: 300px; max-height: 300px;" src="{{ $recipe->image }}" alt="{{ $recipe->title }}">
 </div>

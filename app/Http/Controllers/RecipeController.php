@@ -7,8 +7,7 @@ use App\Models\Recipe;
 use App\Models\Category;
 use App\Models\Comment;
 use Auth;
-use Nette\Utils\Image;
-
+use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
@@ -30,15 +29,43 @@ class RecipeController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
+            'description'=> 'required',
             'ingredients' => 'required',
             'instructions' => 'required',
             'category_id' => 'required|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
 
         $recipe = Auth::user()->recipes()->create($validatedData);
 
-        // return view('recipes.show', compact('recipe'));
+        if ($request->hasFile('image')) {
+            try {
+                $this->uploadImage($request, $recipe);
+            } catch (\Exception $e) {
+                return redirect()->back()->withInput()->withErrors([$e->getMessage()]);
+            }
+        }
+
         return redirect()->route('recipes.edit', $recipe)->with('success', __('Recipe successfully created!'));
+    }
+
+    private function uploadImage(Request $request, Recipe $recipe)
+    {
+        $image = $request->file('image');
+
+        $username = Str::slug(Auth::user()->name);
+        $filename = $username . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+        try {
+            $path = $image->storeAs('public/img/uploads', $filename);
+
+            $path = str_replace('public/', 'storage/', $path);
+
+            $recipe->image = $path;
+            $recipe->save();
+        } catch (\Exception $e) {
+            throw new \Exception('Image upload failed. Please try again later.');
+        }
     }
 
     public function show(Recipe $recipe)
@@ -74,13 +101,13 @@ class RecipeController extends Controller
     {
         $recipe->delete();
         
-        return redirect()->route('recipes.index')->with('success', 'Recipe deleted successfully.');
+        return redirect()->route('recipes.index')->with('success', 'Recipe successfully deleted.');
     }
 
     public function comment(Request $request, Recipe $recipe)
     {
         $request->validate([
-            'comment' => 'required|min:5',
+            'comment' => 'required|min:3',
         ]);
 
         $comment = new Comment;
@@ -90,31 +117,6 @@ class RecipeController extends Controller
 
         $recipe->comments()->save($comment);
 
-        return back()
-            ->with('success', __('Comment created successfully'));
-    }
-
-    public function uploadImage(Request $request, Recipe $recipe)
-    {
-        if (!$request->ajax()) {
-            return abort(404);
-        }
-
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $image = $request->file('image');
-        $fileID = uniqid();
-        $filename = "posts/{$fileID}.{$image->extension()}";
-
-        $image = Image::make($image)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save(public_path("/uploads/{$filename}"));
-
-        $recipe->image = $filename;
-        $recipe->save();
-
-        return response()->json(['image' => $recipe->image ]);
+        return back()->with('success', __('Comment successfully created.'));
     }
 }

@@ -76,7 +76,7 @@
                 @enderror
                 @if($recipe->image)
                     <div class="mt-2">
-                    <img src="{{ $recipe->image }}" alt="Current Recipe Image" class="img-thumbnail">
+                        <img src="{{ asset($recipe->image) }}" alt="Current Recipe Image" class="img-thumbnail">
                     </div>
                 @endif
                 </div>

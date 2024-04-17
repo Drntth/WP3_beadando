@@ -9,7 +9,7 @@
                     <h2 class="card-title mb-4">Explore Recipes by Category</h2>
                     <div class="list-group">
                         @foreach($categories as $category)
-                        <a href="{{ route('recipes.index', $category->slug) }}" class="list-group-item list-group-item-action bg-gray-light text-light">
+                        <a href="{{ route('categories.show', ['category' => $category->id]) }}" class="list-group-item list-group-item-action">
                             {{ $category->name }}
                         </a>
                         @endforeach

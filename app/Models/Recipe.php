@@ -35,6 +35,11 @@ class Recipe extends Model
         return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class)->orderBy('created_at', 'desc');
+    }
+
     public function getImage() {
         if ($this->image !== null) {
             return "storage//img/uploads/{$this->image}";

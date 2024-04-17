@@ -3,11 +3,11 @@
         <img src="{{ $recipe->image }}" class="card-img-top img-fluid mx-auto" style="max-width: 300px; max-height: 300px;" alt="{{ $recipe->title }}">
         <div class="card-body d-flex flex-column justify-content-between">
             <div>
-                <a href="{{ route('recipes.show', $recipe) }}" class="text-light">
+                <a href="{{ route('recipes.show', $recipe) }}" class="card-link">
                     <h5 class="card-title">{{ $recipe->title }}</h5>
                 </a>
                 <p class="mt-auto text-start mb-0 card-text">
-                    <a href="{{ route('categories.show', $recipe->category) }}" class="text-light">
+                    <a href="{{ route('categories.show', $recipe->category) }}" class="card-link">
                         | {{ $recipe->category->name }} |
                     </a>
                 </p>

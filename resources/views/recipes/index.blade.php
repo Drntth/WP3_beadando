@@ -2,11 +2,11 @@
 
 @section('content')
 
-<div class="py-5 text-center container">
+<div class="py-5 text-center container" style="background-image: url('{{ asset('storage/img/bgs/recipes_bg.jpeg') }}'); background-size: cover; background-position: center;">
     <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">{{ __('Recipes') }}</h1>
-            <p class="lead text-body-secondary">{{ __('Check out our delicious recipes below.') }}</p>
+        <div class="col-lg-6 col-md-8 mx-auto bg-white-opacity rounded active">
+            <h1 class="display-2 text-dark">{{ __('Recipes') }}</h1>
+            <p class="lead text-dark">{{ __('Check out our delicious recipes below.') }}</p>
         </div>
     </div>
 </div>

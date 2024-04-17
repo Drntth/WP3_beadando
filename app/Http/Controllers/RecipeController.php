@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Favorite;
 use Auth;
 use Illuminate\Support\Str;
 
@@ -70,7 +71,7 @@ class RecipeController extends Controller
 
     public function show(Recipe $recipe)
     {
-        if (! $recipe) {
+        if (!$recipe) {
             return view('recipes.not-found', [
                 'message' => 'No recipe found with that ID.',
                 'createNewUrl' => Auth::check() ? route('recipes.create') : route('auth.register'),
@@ -83,9 +84,11 @@ class RecipeController extends Controller
 
     public function edit(Recipe $recipe)
     {
+        // TODO: Laravel policy: php artisan make:policy
         if (auth()->user()->id !== $recipe->author_id) {
             abort(403, 'Unauthorized action!');
         }
+
         $categories = Category::orderBy('name')->get();
         return view('recipes.edit', compact('recipe', 'categories'));
     }
@@ -99,6 +102,10 @@ class RecipeController extends Controller
 
     public function destroy(Recipe $recipe)
     {
+        if (auth()->user()->id !== $recipe->author_id) {
+            abort(403, 'Unauthorized action!');
+        }
+
         $recipe->delete();
         
         return redirect()->route('recipes.index')->with('success', 'Recipe successfully deleted.');
@@ -118,5 +125,22 @@ class RecipeController extends Controller
         $recipe->comments()->save($comment);
 
         return back()->with('success', __('Comment successfully created.'));
+    }
+
+    public function favorite(Request $request, Recipe $recipe)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'recipe_id' => 'required',
+        ]);
+    
+        $favorite = new Favorite;
+
+        $favorite->user_id = $request->user_id;
+        $favorite->recipe_id = $recipe->id;
+
+        $favorite->save();
+
+        return back()->with('success', __('Recipe successfully added to favorites.'));
     }
 }

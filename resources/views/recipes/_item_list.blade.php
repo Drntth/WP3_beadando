@@ -1,5 +1,5 @@
 <div class="col-md-7{{ $loop->odd ? '' : ' order-md-2' }}">
-    <a href="{{ route('recipes.show', $recipe) }}" class="text-light">
+    <a href="{{ route('recipes.show', $recipe) }}" class="card-link">
         <h2 class="featurette-heading">{{ $recipe->title }}</h2>
     </a>
     <p class="mt-auto text-start mb-0 card-text">

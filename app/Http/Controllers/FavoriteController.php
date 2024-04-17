@@ -15,7 +15,7 @@ class FavoriteController extends Controller
             return redirect()->route('login')->with('error', 'You must be logged in to view favorites.');
         }
 
-        $favorites = $user->favorites()->get();
+        $favorites = $user->favorites()->paginate(9);
 
         return view('favorites.index', compact('favorites'));
     }

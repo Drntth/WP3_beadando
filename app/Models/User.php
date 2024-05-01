@@ -54,4 +54,6 @@ class User extends Authenticatable
     public function favorites() {
         return $this->hasMany(Favorite::class);
     }
+
+    // TODO: getAvatarAttribute() --> https://docs.gravatar.com/general/
 }

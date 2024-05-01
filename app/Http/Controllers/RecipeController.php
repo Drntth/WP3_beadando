@@ -85,6 +85,7 @@ class RecipeController extends Controller
     public function edit(Recipe $recipe)
     {
         // TODO: Laravel policy: php artisan make:policy
+        // https://laravel.com/docs/10.x/authorization#creating-policies
         if (auth()->user()->id !== $recipe->author_id) {
             abort(403, 'Unauthorized action!');
         }
